@@ -1,0 +1,808 @@
+@charset "UTF-8";
+
+/* --- 変数定義 (カラーパレット) --- */
+:root {
+    --text-main: #4a4a4a;       /* 柔らかい黒（チャコール） */
+    --text-light: #888888;      /* 薄いグレー */
+    --pink-accent: #b78d95;     /* 大人なダスティピンク */
+    --pink-bg: #fdf8f8;         /* ほんのりピンクがかった白 */
+    --white: #ffffff;
+    --font-jp: 'Shippori Mincho', serif;
+    --font-en: 'Cormorant Garamond', serif;
+}
+
+/* --- リセット & 基本設定 --- */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: var(--font-jp);
+    color: var(--text-main);
+    background-color: var(--white);
+    line-height: 2.2;
+    letter-spacing: 0.08em;
+    overflow-x: hidden; /* 横揺れ防止 */
+}
+
+a {
+    text-decoration: none;
+    color: inherit;
+    transition: opacity 0.3s, color 0.3s;
+}
+
+a:hover {
+    opacity: 0.7;
+    color: var(--pink-accent);
+}
+
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+}
+
+/* --- オープニングローディングカーテン --- */
+.loading-curtain {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--pink-bg);
+    z-index: 9999; /* 最前面 */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: transform 1.2s cubic-bezier(0.77, 0, 0.175, 1);
+}
+
+.loading-curtain.loaded {
+    transform: translateY(-100%);
+}
+
+.loading-logo {
+    font-family: var(--font-en);
+    font-size: 2rem;
+    color: var(--pink-accent);
+    letter-spacing: 0.2em;
+    opacity: 0;
+    animation: simple-fade-in 1.5s ease forwards;
+}
+
+@keyframes simple-fade-in {
+    0% { opacity: 0; transform: translateY(10px); }
+    100% { opacity: 1; transform: translateY(0); }
+}
+
+/* --- フェードインアニメーション --- */
+.fade-in-up {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 1.2s ease-out, transform 1.2s ease-out;
+}
+.fade-in-up.visible {
+    opacity: 1;
+    transform: translateY(0);
+}
+
+/* --- ヘッダー --- */
+header {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    padding: 20px 40px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    z-index: 1000;
+    background: rgba(255, 255, 255, 0.95);
+    transition: padding 0.3s;
+}
+
+.logo {
+    font-family: var(--font-en);
+    font-size: 1.4rem;
+    letter-spacing: 0.15em;
+    color: var(--text-main);
+    font-weight: 400;
+}
+
+/* PC用ナビゲーション */
+.pc-nav ul {
+    display: flex;
+    list-style: none;
+    gap: 40px;
+}
+.pc-nav li a {
+    font-family: var(--font-en);
+    font-size: 0.95rem;
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    position: relative;
+}
+/* ホバー時の下線アニメーション */
+.pc-nav li a::after {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 0;
+    width: 0%;
+    height: 1px;
+    background-color: var(--pink-accent);
+    transition: width 0.3s;
+}
+.pc-nav li a:hover::after {
+    width: 100%;
+}
+
+/* スマホ用ハンバーガーメニュー */
+.hamburger {
+    display: none;
+    cursor: pointer;
+    z-index: 2000;
+}
+.hamburger div {
+    width: 25px;
+    height: 1px;
+    background-color: var(--text-main);
+    margin: 6px 0;
+    transition: 0.4s;
+}
+/* 開いた時のハンバーガー変形 */
+.mobile-nav {
+    position: fixed;
+    top: 0;
+    right: -100%;
+    width: 100%;
+    height: 100vh;
+    background-color: var(--pink-bg);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    z-index: 1500;
+    opacity: 0;
+}
+.mobile-nav.active {
+    right: 0;
+    opacity: 1;
+}
+.mobile-nav ul {
+    list-style: none;
+    text-align: center;
+}
+.mobile-nav li {
+    margin: 30px 0;
+}
+.mobile-nav a {
+    font-family: var(--font-en);
+    font-size: 1.5rem;
+    color: var(--text-main);
+}
+
+/* --- ヒーローセクション (トップ画) --- */
+.hero {
+    height: 100vh;
+    width: 100%;
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+
+/* 背景画像とフィルター */
+.hero::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: var(--pink-bg) url('../images/hero/IMG_6673.jpg') center/contain no-repeat;
+    opacity: 0.95;
+    z-index: -1;
+}
+/* ピンクのオーバーレイ */
+.hero::after {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(183, 141, 149, 0.1); /* ほんのりピンク */
+    z-index: -1;
+}
+
+.hero-content {
+    z-index: 10;
+    text-align: center;
+    padding: 20px;
+    background: rgba(255, 255, 255, 0.6); /* 文字が読みやすいように半透明の白背景 */
+    backdrop-filter: blur(2px);
+    border-radius: 2px;
+    /* 縦書き設定 */
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+    letter-spacing: 0.4em;
+}
+
+.hero-title {
+    font-size: 2.2rem;
+    font-weight: 500;
+    margin: 0 15px;
+    color: var(--text-main);
+}
+.hero-subtitle {
+    font-size: 0.9rem;
+    color: var(--text-main);
+    margin: 0 10px;
+    font-family: var(--font-en); /* 英字は縦書き解除したいがCSS複雑になるため今回は和文スタイルで統一 */
+    letter-spacing: 0.2em;
+}
+
+/* --- セクション共通 --- */
+section {
+    padding: 120px 10%;
+    max-width: 1200px;
+    margin: 0 auto;
+}
+.section-header {
+    text-align: center;
+    margin-bottom: 80px;
+}
+.en-title {
+    display: block;
+    font-family: var(--font-en);
+    font-size: 3rem;
+    color: var(--pink-accent);
+    margin-bottom: 10px;
+    font-weight: 300;
+}
+.jp-title {
+    font-size: 0.9rem;
+    color: var(--text-light);
+    letter-spacing: 0.2em;
+}
+
+/* --- ABOUT --- */
+.about-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 60px;
+    align-items: center;
+}
+.about-img-wrap {
+    position: relative;
+}
+.about-img {
+    width: 100%;
+    height: 500px;
+    object-fit: cover;
+    /* 少しセピア調に */
+    filter: sepia(0.1);
+}
+/* 写真の装飾枠（ずらしレイアウト） */
+.about-img-wrap::before {
+    content: '';
+    position: absolute;
+    top: -20px;
+    left: -20px;
+    width: 100%;
+    height: 100%;
+    border: 1px solid var(--pink-accent);
+    z-index: -1;
+}
+
+.about-text h3 {
+    font-size: 1.5rem;
+    margin-bottom: 30px;
+    font-weight: 500;
+}
+.about-text p {
+    margin-bottom: 25px;
+    text-align: justify; /* 両端揃え */
+}
+.sign {
+    font-family: var(--font-en);
+    font-size: 1.5rem;
+    color: var(--pink-accent);
+    margin-top: 30px;
+    display: block;
+    text-align: right;
+}
+
+/* --- GALLERY / WORKS (写真を見せるエリア) --- */
+.gallery-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+.gallery-item {
+    position: relative;
+    overflow: hidden;
+    aspect-ratio: 1 / 1; /* 正方形 */
+    background-color: #f0f0f0;
+}
+.gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform 0.6s ease;
+}
+.gallery-item:hover img {
+    transform: scale(1.05); /* ホバーで少し拡大 */
+}
+.overlay {
+    position: absolute;
+    top: 0; left: 0; width: 100%; height: 100%;
+    background: rgba(183, 141, 149, 0.4);
+    opacity: 0;
+    transition: 0.4s;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-family: var(--font-en);
+    font-size: 1.2rem;
+}
+.gallery-item:hover .overlay {
+    opacity: 1;
+}
+
+/* --- SERVICE --- */
+.service-list {
+    display: flex;
+    justify-content: space-between;
+    gap: 40px;
+    flex-wrap: wrap;
+}
+.service-item {
+    flex: 1;
+    min-width: 280px;
+    text-align: center;
+    padding: 40px 20px;
+    border: 1px solid #eee;
+    background-color: var(--white);
+    transition: 0.4s;
+}
+.service-item:hover {
+    border-color: var(--pink-accent);
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(183, 141, 149, 0.1);
+}
+.service-num {
+    font-family: var(--font-en);
+    color: var(--pink-accent);
+    font-size: 1.2rem;
+    display: block;
+    margin-bottom: 15px;
+}
+.service-item h3 {
+    font-size: 1.2rem;
+    margin-bottom: 20px;
+    font-weight: 500;
+}
+.service-btn {
+    display: inline-block;
+    margin-top: 20px;
+    padding: 8px 25px;
+    font-size: 0.8rem;
+    border: 1px solid var(--text-main);
+    border-radius: 50px;
+}
+
+/* --- CONTACT --- */
+.contact-section {
+    background-color: var(--pink-bg);
+    text-align: center;
+}
+.contact-btn {
+    display: inline-block;
+    background-color: var(--pink-accent);
+    color: white;
+    padding: 15px 50px;
+    border-radius: 2px;
+    font-size: 1rem;
+    letter-spacing: 0.1em;
+    margin-top: 30px;
+    transition: 0.3s;
+}
+.contact-btn:hover {
+    background-color: #a37a82;
+    color: white;
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: #333;
+    color: #ccc;
+    padding: 60px 20px;
+    text-align: center;
+    font-size: 0.8rem;
+}
+.footer-logo {
+    font-family: var(--font-en);
+    font-size: 1.5rem;
+    color: white;
+    margin-bottom: 20px;
+    display: block;
+}
+.social-links {
+    margin-bottom: 30px;
+}
+.social-links a {
+    font-size: 1.2rem;
+    margin: 0 10px;
+    color: white;
+}
+
+/* --- 桜の花びらエフェクト（上品版） --- */
+.sakura-petal {
+    position: fixed;
+    top: -50px;
+    pointer-events: none;
+    z-index: 9999;
+    opacity: 0;
+    filter: drop-shadow(0 2px 4px rgba(183, 141, 149, 0.3));
+    animation: sakura-fall linear forwards;
+}
+
+@keyframes sakura-fall {
+    0% {
+        transform: translateX(0) rotate(0deg) scale(0.8);
+        opacity: 0;
+    }
+    10% {
+        opacity: 0.7;
+    }
+    25% {
+        transform: translateX(50px) rotate(90deg) scale(1);
+    }
+    50% {
+        transform: translateX(-30px) rotate(180deg) scale(0.9);
+        opacity: 0.6;
+    }
+    75% {
+        transform: translateX(60px) rotate(270deg) scale(1);
+    }
+    90% {
+        opacity: 0.4;
+    }
+    100% {
+        transform: translateX(-20px) rotate(360deg) scale(0.7);
+        opacity: 0;
+    }
+}
+
+/* キラキラパーティクル */
+.sparkle {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    width: 4px;
+    height: 4px;
+    background: radial-gradient(circle, rgba(255, 255, 255, 1) 0%, rgba(212, 175, 175, 0.8) 40%, transparent 70%);
+    border-radius: 50%;
+    animation: sparkle-twinkle 1.5s ease-in-out forwards;
+}
+
+@keyframes sparkle-twinkle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+    20% {
+        transform: scale(1.2) rotate(90deg);
+        opacity: 1;
+    }
+    50% {
+        transform: scale(0.8) rotate(180deg);
+        opacity: 0.8;
+    }
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
+/* --- カーソルトレイルエフェクト（上品版） --- */
+.cursor-trail {
+    position: fixed;
+    width: 16px;
+    height: 16px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.9) 0%,
+        rgba(212, 175, 185, 0.5) 30%,
+        rgba(183, 141, 149, 0.3) 60%,
+        transparent 80%);
+    pointer-events: none;
+    z-index: 9998;
+    mix-blend-mode: soft-light;
+    animation: trail-fade 1s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+}
+
+@keyframes trail-fade {
+    0% {
+        transform: scale(1);
+        opacity: 0.9;
+    }
+    50% {
+        transform: scale(1.2);
+        opacity: 0.5;
+    }
+    100% {
+        transform: scale(0.2);
+        opacity: 0;
+    }
+}
+
+/* カーソル本体のグロー（メインカーソル） */
+.cursor-glow {
+    position: fixed;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(183, 141, 149, 0.15) 0%,
+        transparent 70%);
+    pointer-events: none;
+    z-index: 9997;
+    transform: translate(-50%, -50%);
+    transition: transform 0.1s ease-out;
+}
+
+/* --- 波型ディバイダー（多層版） --- */
+.wave-divider {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+    line-height: 0;
+    margin: 0;
+    padding: 0;
+}
+
+.wave-divider svg {
+    display: block;
+    width: 100%;
+    height: 80px;
+}
+
+.wave-divider.wave-top {
+    transform: rotate(180deg);
+}
+
+.wave-divider .wave-layer-1 {
+    fill: rgba(183, 141, 149, 0.08);
+}
+
+.wave-divider .wave-layer-2 {
+    fill: rgba(183, 141, 149, 0.05);
+}
+
+.wave-divider .wave-layer-3 {
+    fill: var(--pink-bg);
+}
+
+/* --- リップルクリックエフェクト（上品版） --- */
+.ripple-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.ripple {
+    position: absolute;
+    border-radius: 50%;
+    background: radial-gradient(circle,
+        rgba(255, 255, 255, 0.8) 0%,
+        rgba(212, 175, 185, 0.4) 40%,
+        rgba(183, 141, 149, 0.2) 70%,
+        transparent 100%);
+    transform: scale(0);
+    animation: ripple-effect 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
+    pointer-events: none;
+}
+
+@keyframes ripple-effect {
+    0% {
+        transform: scale(0);
+        opacity: 1;
+    }
+    60% {
+        opacity: 0.6;
+    }
+    100% {
+        transform: scale(4);
+        opacity: 0;
+    }
+}
+
+/* ボタンにリップル効果とホバーグロー */
+.contact-btn,
+.service-btn,
+.pc-nav li a,
+.mobile-nav a {
+    position: relative;
+    overflow: hidden;
+}
+
+/* ボタンホバー時のグロー */
+.contact-btn::before,
+.service-btn::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 0;
+    height: 0;
+    background: radial-gradient(circle, rgba(255, 255, 255, 0.3) 0%, transparent 70%);
+    border-radius: 50%;
+    transform: translate(-50%, -50%);
+    transition: width 0.4s ease, height 0.4s ease;
+    z-index: 0;
+}
+
+.contact-btn:hover::before,
+.service-btn:hover::before {
+    width: 300px;
+    height: 300px;
+}
+
+/* ナビリンクのエレガントなホバー */
+.pc-nav li a::before {
+    content: '';
+    position: absolute;
+    bottom: -5px;
+    left: 50%;
+    width: 0;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--pink-accent), transparent);
+    transform: translateX(-50%);
+    transition: width 0.4s ease;
+}
+
+.pc-nav li a:hover::before {
+    width: 100%;
+}
+
+/* 既存の下線アニメーションを調整 */
+.pc-nav li a::after {
+    display: none;
+}
+
+/* --- ふわっとバウンスエフェクト --- */
+@keyframes soft-bounce {
+    0% {
+        transform: translateY(0);
+    }
+    30% {
+        transform: translateY(-8px);
+    }
+    50% {
+        transform: translateY(-4px);
+    }
+    70% {
+        transform: translateY(-6px);
+    }
+    100% {
+        transform: translateY(-5px);
+    }
+}
+
+@keyframes soft-bounce-scale {
+    0% {
+        transform: scale(1) translateY(0);
+    }
+    30% {
+        transform: scale(1.02) translateY(-6px);
+    }
+    50% {
+        transform: scale(1.01) translateY(-3px);
+    }
+    70% {
+        transform: scale(1.015) translateY(-5px);
+    }
+    100% {
+        transform: scale(1.01) translateY(-4px);
+    }
+}
+
+/* サービスカードのバウンス */
+.service-item {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
+                border-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.service-item:hover {
+    animation: soft-bounce 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+    border-color: var(--pink-accent);
+    box-shadow: 0 15px 30px rgba(183, 141, 149, 0.15);
+}
+
+/* ギャラリーアイテムのバウンス */
+.gallery-item {
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.gallery-item:hover {
+    animation: soft-bounce-scale 0.5s cubic-bezier(0.34, 1.56, 0.64, 1) forwards;
+}
+
+/* ボタンのバウンス */
+.contact-btn,
+.service-btn {
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                background-color 0.3s ease,
+                box-shadow 0.3s ease;
+}
+
+.contact-btn:hover,
+.service-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 8px 20px rgba(183, 141, 149, 0.25);
+}
+
+.contact-btn:active,
+.service-btn:active {
+    transform: translateY(-1px) scale(1);
+}
+
+/* ナビリンクの微細バウンス */
+.pc-nav li a {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.pc-nav li a:hover {
+    transform: translateY(-2px);
+}
+
+/* SNSアイコンのバウンス */
+.social-links a {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
+                color 0.3s ease;
+}
+
+.social-links a:hover {
+    transform: translateY(-4px) scale(1.1);
+    color: var(--pink-accent);
+}
+
+/* ロゴのバウンス */
+.logo a {
+    display: inline-block;
+    transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.logo a:hover {
+    transform: translateY(-2px);
+}
+
+/* --- レスポンシブ対応 (スマホ) --- */
+@media (max-width: 768px) {
+    header { padding: 15px 20px; }
+    .pc-nav { display: none; }
+    .hamburger { display: block; }
+
+    section { padding: 80px 20px; }
+
+    .about-grid { grid-template-columns: 1fr; gap: 40px; }
+    .about-img { height: 300px; }
+
+    .hero-title { font-size: 1.6rem; }
+    .hero-content { padding: 30px 15px; }
+
+    .service-list { flex-direction: column; }
+
+    /* スマホでは桜エフェクトを軽量化 */
+    .sakura-petal {
+        opacity: 0.6;
+    }
+
+    /* スマホではカーソルトレイルを無効化 */
+    .cursor-trail {
+        display: none;
+    }
+}

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ja">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gallery | YUKI HIGURASHI</title>
+
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@300;400;600&family=Shippori+Mincho:wght@400;500&display=swap"
+        rel="stylesheet">
+
+    <!-- FontAwesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="assets/css/style.css">
+</head>
+
+<body>
+
+    <!-- ヘッダー -->
+    <header>
+        <div class="logo"><a href="index.html">YUKI HIGURASHI</a></div>
+
+        <!-- PC用メニュー -->
+        <nav class="pc-nav">
+            <ul>
+                <li><a href="about.html">About</a></li>
+                <li><a href="gallery.html">Gallery</a></li>
+                <li><a href="service.html">Service</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+
+        <!-- スマホ用メニューボタン -->
+        <div class="hamburger" id="hamburger">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+    </header>
+
+    <!-- スマホ用ドロワーメニュー -->
+    <div class="mobile-nav" id="mobile-nav">
+        <ul>
+            <li><a href="about.html" onclick="toggleMenu()">About</a></li>
+            <li><a href="gallery.html" onclick="toggleMenu()">Gallery</a></li>
+            <li><a href="service.html" onclick="toggleMenu()">Service</a></li>
+            <li><a href="contact.html" onclick="toggleMenu()">Contact</a></li>
+            <li><a href="https://www.instagram.com/yukisroom2025" target="_blank"
+                    style="font-size: 1rem; color: var(--pink-accent);"><i class="fab fa-instagram"></i> Instagram</a>
+            </li>
+        </ul>
+    </div>
+
+    <!-- コンテンツエリアの余白確保 (ヘッダー被り防止) -->
+    <div style="height: 100px;"></div>
+
+    <!-- ギャラリー -->
+    <section id="gallery" style="background-color: #fafafa;">
+        <div class="section-header fade-in-up">
+            <span class="en-title">Gallery</span>
+            <span class="jp-title">世界観</span>
+        </div>
+
+        <div class="gallery-grid fade-in-up">
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1526047932273-341f2a7631f9?q=80&w=800&auto=format&fit=crop"
+                    alt="Flowers">
+                <div class="overlay">Flowers</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1513694203232-719a280e022f?q=80&w=800&auto=format&fit=crop"
+                    alt="Interior">
+                <div class="overlay">Room</div>
+            </div>
+            <div class="gallery-item">
+                <img src="https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=800&auto=format&fit=crop"
+                    alt="Lifestyle">
+                <div class="overlay">Life</div>
+            </div>
+        </div>
+    </section>
+
+    <!-- フッター -->
+    <footer>
+        <span class="footer-logo">YUKI HIGURASHI</span>
+        <div class="social-links">
+            <a href="https://www.instagram.com/yukisroom2025" target="_blank"><i class="fab fa-instagram"></i></a>
+        </div>
+        <p>
+            株式会社ANGELICA<br>
+            © 2025 Yuki Higurashi / ANGELICA Co., Ltd. All Rights Reserved.
+        </p>
+    </footer>
+
+    <!-- JavaScript -->
+    <script src="assets/js/main.js"></script>
+</body>
+
+</html>
