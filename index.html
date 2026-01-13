@@ -20,8 +20,14 @@
 
 <body>
 
-    <!-- ローディングカーテン -->
+    <!-- ✨ ローディングカーテン（華やか版） -->
     <div class="loading-curtain" id="loading-curtain">
+        <div class="loading-hearts">
+            <span class="loading-heart">💖</span>
+            <span class="loading-heart">💖</span>
+            <span class="loading-heart">💖</span>
+            <span class="loading-heart">💖</span>
+        </div>
         <div class="loading-logo">YUKI HIGURASHI</div>
     </div>
 
@@ -60,10 +66,17 @@
         </ul>
     </div>
 
-    <!-- メインビジュアル -->
+    <!-- 🌈 メインビジュアル -->
     <section class="hero">
+        <!-- グラデーション背景 -->
+        <div class="hero-gradient-bg"></div>
+
+        <!-- フローティングハート（JSで追加生成） -->
+        <div id="floating-hearts-container"></div>
+
         <div class="hero-content fade-in-up">
-            <h1 class="hero-title">ゆきの部屋</h1>
+            <h1 class="hero-title" id="hero-title"></h1>
+            <p class="hero-subtitle">Welcome to Yuki's Room</p>
         </div>
     </section>
 

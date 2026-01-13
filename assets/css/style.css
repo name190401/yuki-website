@@ -2,13 +2,31 @@
 
 /* --- 変数定義 (カラーパレット) --- */
 :root {
-    --text-main: #4a4a4a;       /* 柔らかい黒（チャコール） */
-    --text-light: #888888;      /* 薄いグレー */
-    --pink-accent: #b78d95;     /* 大人なダスティピンク */
-    --pink-bg: #fdf8f8;         /* ほんのりピンクがかった白 */
+    --text-main: #4a4a4a;
+    /* 柔らかい黒（チャコール） */
+    --text-light: #888888;
+    /* 薄いグレー */
+    --pink-accent: #b78d95;
+    /* 大人なダスティピンク */
+    --pink-bg: #fdf8f8;
+    /* ほんのりピンクがかった白 */
     --white: #ffffff;
     --font-jp: 'Shippori Mincho', serif;
     --font-en: 'Cormorant Garamond', serif;
+
+    /* 🌈 華やかなアクセントカラー */
+    --rose-gold: #f5c7c7;
+    /* ローズゴールド */
+    --soft-coral: #ffb6b6;
+    /* ソフトコーラル */
+    --candy-pink: #ff85a2;
+    /* キャンディピンク */
+    --pearl-white: #fff5f5;
+    /* パールホワイト */
+    --lavender-mist: #e8d4f0;
+    /* ラベンダーミスト */
+    --gold-shimmer: #ffd700;
+    /* ゴールドシマー */
 }
 
 /* --- リセット & 基本設定 --- */
@@ -24,7 +42,8 @@ body {
     background-color: var(--white);
     line-height: 2.2;
     letter-spacing: 0.08em;
-    overflow-x: hidden; /* 横揺れ防止 */
+    overflow-x: hidden;
+    /* 横揺れ防止 */
 }
 
 a {
@@ -52,7 +71,8 @@ img {
     width: 100%;
     height: 100vh;
     background-color: var(--pink-bg);
-    z-index: 9999; /* 最前面 */
+    z-index: 9999;
+    /* 最前面 */
     display: flex;
     justify-content: center;
     align-items: center;
@@ -73,8 +93,15 @@ img {
 }
 
 @keyframes simple-fade-in {
-    0% { opacity: 0; transform: translateY(10px); }
-    100% { opacity: 1; transform: translateY(0); }
+    0% {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 /* --- フェードインアニメーション --- */
@@ -83,6 +110,7 @@ img {
     transform: translateY(30px);
     transition: opacity 1.2s ease-out, transform 1.2s ease-out;
 }
+
 .fade-in-up.visible {
     opacity: 1;
     transform: translateY(0);
@@ -117,6 +145,7 @@ header {
     list-style: none;
     gap: 40px;
 }
+
 .pc-nav li a {
     font-family: var(--font-en);
     font-size: 0.95rem;
@@ -124,6 +153,7 @@ header {
     letter-spacing: 0.1em;
     position: relative;
 }
+
 /* ホバー時の下線アニメーション */
 .pc-nav li a::after {
     content: '';
@@ -135,6 +165,7 @@ header {
     background-color: var(--pink-accent);
     transition: width 0.3s;
 }
+
 .pc-nav li a:hover::after {
     width: 100%;
 }
@@ -145,6 +176,7 @@ header {
     cursor: pointer;
     z-index: 2000;
 }
+
 .hamburger div {
     width: 25px;
     height: 1px;
@@ -152,6 +184,7 @@ header {
     margin: 6px 0;
     transition: 0.4s;
 }
+
 /* 開いた時のハンバーガー変形 */
 .mobile-nav {
     position: fixed;
@@ -167,17 +200,21 @@ header {
     z-index: 1500;
     opacity: 0;
 }
+
 .mobile-nav.active {
     right: 0;
     opacity: 1;
 }
+
 .mobile-nav ul {
     list-style: none;
     text-align: center;
 }
+
 .mobile-nav li {
     margin: 30px 0;
 }
+
 .mobile-nav a {
     font-family: var(--font-en);
     font-size: 1.5rem;
@@ -195,48 +232,202 @@ header {
     overflow: hidden;
 }
 
+/* 🌈 グラデーション背景アニメーション */
+.hero-gradient-bg {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+            var(--pearl-white) 0%,
+            var(--rose-gold) 25%,
+            var(--pink-bg) 50%,
+            var(--soft-coral) 75%,
+            var(--pearl-white) 100%);
+    background-size: 400% 400%;
+    animation: gradient-shift 15s ease infinite;
+    z-index: -3;
+}
+
+@keyframes gradient-shift {
+    0% {
+        background-position: 0% 50%;
+    }
+
+    50% {
+        background-position: 100% 50%;
+    }
+
+    100% {
+        background-position: 0% 50%;
+    }
+}
+
 /* 背景画像とフィルター */
 .hero::before {
     content: '';
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: var(--pink-bg) url('../images/hero/IMG_6673.jpg') center/contain no-repeat;
-    opacity: 0.95;
-    z-index: -1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: url('../images/hero/IMG_6673.jpg') center/contain no-repeat;
+    opacity: 0.85;
+    z-index: -2;
 }
+
 /* ピンクのオーバーレイ */
 .hero::after {
     content: '';
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(183, 141, 149, 0.1); /* ほんのりピンク */
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg,
+            rgba(255, 133, 162, 0.08) 0%,
+            rgba(183, 141, 149, 0.12) 50%,
+            rgba(245, 199, 199, 0.1) 100%);
     z-index: -1;
 }
 
+/* ✨ グラスモーフィズム強化 */
 .hero-content {
     z-index: 10;
     text-align: center;
-    padding: 20px;
-    background: rgba(255, 255, 255, 0.6); /* 文字が読みやすいように半透明の白背景 */
-    backdrop-filter: blur(2px);
-    border-radius: 2px;
+    padding: 40px 35px;
+    background: rgba(255, 255, 255, 0.7);
+    backdrop-filter: blur(12px);
+    -webkit-backdrop-filter: blur(12px);
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    box-shadow:
+        0 8px 32px rgba(183, 141, 149, 0.15),
+        0 0 60px rgba(255, 182, 182, 0.1),
+        inset 0 1px 0 rgba(255, 255, 255, 0.8);
     /* 縦書き設定 */
     writing-mode: vertical-rl;
     text-orientation: upright;
     letter-spacing: 0.4em;
+    animation: float-gentle 6s ease-in-out infinite;
+}
+
+@keyframes float-gentle {
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-10px);
+    }
 }
 
 .hero-title {
-    font-size: 2.2rem;
+    font-size: 2.4rem;
     font-weight: 500;
     margin: 0 15px;
     color: var(--text-main);
+    text-shadow: 0 2px 10px rgba(183, 141, 149, 0.2);
 }
+
+/* 💖 タイピングアニメーション用 */
+.typing-text {
+    display: inline-block;
+    overflow: hidden;
+    white-space: nowrap;
+    border-right: 2px solid var(--candy-pink);
+    animation: typing-cursor 0.8s step-end infinite;
+}
+
+@keyframes typing-cursor {
+
+    0%,
+    100% {
+        border-color: transparent;
+    }
+
+    50% {
+        border-color: var(--candy-pink);
+    }
+}
+
+/* 🎀 サブタイトル追加 */
+.hero-subtitle {
+    font-size: 0.9rem;
+    color: var(--pink-accent);
+    margin: 0 10px;
+    font-family: var(--font-en);
+    letter-spacing: 0.15em;
+    opacity: 0.9;
+}
+
+/* 💫 フローティングハート */
+.floating-heart {
+    position: absolute;
+    pointer-events: none;
+    z-index: 5;
+    opacity: 0;
+    animation: float-up 8s ease-in-out infinite;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) rotate(0deg) scale(0.5);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: 0.7;
+    }
+
+    90% {
+        opacity: 0.5;
+    }
+
+    100% {
+        transform: translateY(-100px) rotate(360deg) scale(1);
+        opacity: 0;
+    }
+}
+
+/* ✨ グリッターバースト */
+.glitter {
+    position: fixed;
+    width: 10px;
+    height: 10px;
+    pointer-events: none;
+    z-index: 9999;
+    background: radial-gradient(circle, var(--gold-shimmer) 0%, var(--candy-pink) 50%, transparent 70%);
+    border-radius: 50%;
+    animation: glitter-burst 1.2s ease-out forwards;
+}
+
+@keyframes glitter-burst {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    50% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 0.8;
+    }
+
+    100% {
+        transform: scale(0) rotate(360deg);
+        opacity: 0;
+    }
+}
+
 .hero-subtitle {
     font-size: 0.9rem;
     color: var(--text-main);
     margin: 0 10px;
-    font-family: var(--font-en); /* 英字は縦書き解除したいがCSS複雑になるため今回は和文スタイルで統一 */
+    font-family: var(--font-en);
+    /* 英字は縦書き解除したいがCSS複雑になるため今回は和文スタイルで統一 */
     letter-spacing: 0.2em;
 }
 
@@ -246,10 +437,12 @@ section {
     max-width: 1200px;
     margin: 0 auto;
 }
+
 .section-header {
     text-align: center;
     margin-bottom: 80px;
 }
+
 .en-title {
     display: block;
     font-family: var(--font-en);
@@ -258,6 +451,7 @@ section {
     margin-bottom: 10px;
     font-weight: 300;
 }
+
 .jp-title {
     font-size: 0.9rem;
     color: var(--text-light);
@@ -271,9 +465,11 @@ section {
     gap: 60px;
     align-items: center;
 }
+
 .about-img-wrap {
     position: relative;
 }
+
 .about-img {
     width: 100%;
     height: 500px;
@@ -281,6 +477,7 @@ section {
     /* 少しセピア調に */
     filter: sepia(0.1);
 }
+
 /* 写真の装飾枠（ずらしレイアウト） */
 .about-img-wrap::before {
     content: '';
@@ -298,10 +495,13 @@ section {
     margin-bottom: 30px;
     font-weight: 500;
 }
+
 .about-text p {
     margin-bottom: 25px;
-    text-align: justify; /* 両端揃え */
+    text-align: justify;
+    /* 両端揃え */
 }
+
 .sign {
     font-family: var(--font-en);
     font-size: 1.5rem;
@@ -317,24 +517,33 @@ section {
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 20px;
 }
+
 .gallery-item {
     position: relative;
     overflow: hidden;
-    aspect-ratio: 1 / 1; /* 正方形 */
+    aspect-ratio: 1 / 1;
+    /* 正方形 */
     background-color: #f0f0f0;
 }
+
 .gallery-item img {
     width: 100%;
     height: 100%;
     object-fit: cover;
     transition: transform 0.6s ease;
 }
+
 .gallery-item:hover img {
-    transform: scale(1.05); /* ホバーで少し拡大 */
+    transform: scale(1.05);
+    /* ホバーで少し拡大 */
 }
+
 .overlay {
     position: absolute;
-    top: 0; left: 0; width: 100%; height: 100%;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     background: rgba(183, 141, 149, 0.4);
     opacity: 0;
     transition: 0.4s;
@@ -345,6 +554,7 @@ section {
     font-family: var(--font-en);
     font-size: 1.2rem;
 }
+
 .gallery-item:hover .overlay {
     opacity: 1;
 }
@@ -356,6 +566,7 @@ section {
     gap: 40px;
     flex-wrap: wrap;
 }
+
 .service-item {
     flex: 1;
     min-width: 280px;
@@ -365,11 +576,27 @@ section {
     background-color: var(--white);
     transition: 0.4s;
 }
+
+/* 🎀 サービスアイコンスタイル */
+.service-icon {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin: 0 auto 20px;
+    display: block;
+    transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.service-item:hover .service-icon {
+    transform: scale(1.1) rotate(5deg);
+}
+
 .service-item:hover {
     border-color: var(--pink-accent);
     transform: translateY(-5px);
     box-shadow: 0 10px 20px rgba(183, 141, 149, 0.1);
 }
+
 .service-num {
     font-family: var(--font-en);
     color: var(--pink-accent);
@@ -377,11 +604,13 @@ section {
     display: block;
     margin-bottom: 15px;
 }
+
 .service-item h3 {
     font-size: 1.2rem;
     margin-bottom: 20px;
     font-weight: 500;
 }
+
 .service-btn {
     display: inline-block;
     margin-top: 20px;
@@ -396,6 +625,7 @@ section {
     background-color: var(--pink-bg);
     text-align: center;
 }
+
 .contact-btn {
     display: inline-block;
     background-color: var(--pink-accent);
@@ -407,6 +637,7 @@ section {
     margin-top: 30px;
     transition: 0.3s;
 }
+
 .contact-btn:hover {
     background-color: #a37a82;
     color: white;
@@ -420,6 +651,7 @@ footer {
     text-align: center;
     font-size: 0.8rem;
 }
+
 .footer-logo {
     font-family: var(--font-en);
     font-size: 1.5rem;
@@ -427,9 +659,11 @@ footer {
     margin-bottom: 20px;
     display: block;
 }
+
 .social-links {
     margin-bottom: 30px;
 }
+
 .social-links a {
     font-size: 1.2rem;
     margin: 0 10px;
@@ -452,22 +686,28 @@ footer {
         transform: translateX(0) rotate(0deg) scale(0.8);
         opacity: 0;
     }
+
     10% {
         opacity: 0.7;
     }
+
     25% {
         transform: translateX(50px) rotate(90deg) scale(1);
     }
+
     50% {
         transform: translateX(-30px) rotate(180deg) scale(0.9);
         opacity: 0.6;
     }
+
     75% {
         transform: translateX(60px) rotate(270deg) scale(1);
     }
+
     90% {
         opacity: 0.4;
     }
+
     100% {
         transform: translateX(-20px) rotate(360deg) scale(0.7);
         opacity: 0;
@@ -491,14 +731,17 @@ footer {
         transform: scale(0) rotate(0deg);
         opacity: 0;
     }
+
     20% {
         transform: scale(1.2) rotate(90deg);
         opacity: 1;
     }
+
     50% {
         transform: scale(0.8) rotate(180deg);
         opacity: 0.8;
     }
+
     100% {
         transform: scale(0) rotate(360deg);
         opacity: 0;
@@ -512,10 +755,10 @@ footer {
     height: 16px;
     border-radius: 50%;
     background: radial-gradient(circle,
-        rgba(255, 255, 255, 0.9) 0%,
-        rgba(212, 175, 185, 0.5) 30%,
-        rgba(183, 141, 149, 0.3) 60%,
-        transparent 80%);
+            rgba(255, 255, 255, 0.9) 0%,
+            rgba(212, 175, 185, 0.5) 30%,
+            rgba(183, 141, 149, 0.3) 60%,
+            transparent 80%);
     pointer-events: none;
     z-index: 9998;
     mix-blend-mode: soft-light;
@@ -527,10 +770,12 @@ footer {
         transform: scale(1);
         opacity: 0.9;
     }
+
     50% {
         transform: scale(1.2);
         opacity: 0.5;
     }
+
     100% {
         transform: scale(0.2);
         opacity: 0;
@@ -544,8 +789,8 @@ footer {
     height: 30px;
     border-radius: 50%;
     background: radial-gradient(circle,
-        rgba(183, 141, 149, 0.15) 0%,
-        transparent 70%);
+            rgba(183, 141, 149, 0.15) 0%,
+            transparent 70%);
     pointer-events: none;
     z-index: 9997;
     transform: translate(-50%, -50%);
@@ -594,10 +839,10 @@ footer {
     position: absolute;
     border-radius: 50%;
     background: radial-gradient(circle,
-        rgba(255, 255, 255, 0.8) 0%,
-        rgba(212, 175, 185, 0.4) 40%,
-        rgba(183, 141, 149, 0.2) 70%,
-        transparent 100%);
+            rgba(255, 255, 255, 0.8) 0%,
+            rgba(212, 175, 185, 0.4) 40%,
+            rgba(183, 141, 149, 0.2) 70%,
+            transparent 100%);
     transform: scale(0);
     animation: ripple-effect 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94) forwards;
     pointer-events: none;
@@ -608,9 +853,11 @@ footer {
         transform: scale(0);
         opacity: 1;
     }
+
     60% {
         opacity: 0.6;
     }
+
     100% {
         transform: scale(4);
         opacity: 0;
@@ -675,15 +922,19 @@ footer {
     0% {
         transform: translateY(0);
     }
+
     30% {
         transform: translateY(-8px);
     }
+
     50% {
         transform: translateY(-4px);
     }
+
     70% {
         transform: translateY(-6px);
     }
+
     100% {
         transform: translateY(-5px);
     }
@@ -693,15 +944,19 @@ footer {
     0% {
         transform: scale(1) translateY(0);
     }
+
     30% {
         transform: scale(1.02) translateY(-6px);
     }
+
     50% {
         transform: scale(1.01) translateY(-3px);
     }
+
     70% {
         transform: scale(1.015) translateY(-5px);
     }
+
     100% {
         transform: scale(1.01) translateY(-4px);
     }
@@ -710,8 +965,8 @@ footer {
 /* サービスカードのバウンス */
 .service-item {
     transition: transform 0.4s cubic-bezier(0.34, 1.56, 0.64, 1),
-                border-color 0.3s ease,
-                box-shadow 0.3s ease;
+        border-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .service-item:hover {
@@ -733,8 +988,8 @@ footer {
 .contact-btn,
 .service-btn {
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                background-color 0.3s ease,
-                box-shadow 0.3s ease;
+        background-color 0.3s ease,
+        box-shadow 0.3s ease;
 }
 
 .contact-btn:hover,
@@ -762,7 +1017,7 @@ footer {
 .social-links a {
     display: inline-block;
     transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1),
-                color 0.3s ease;
+        color 0.3s ease;
 }
 
 .social-links a:hover {
@@ -782,19 +1037,44 @@ footer {
 
 /* --- レスポンシブ対応 (スマホ) --- */
 @media (max-width: 768px) {
-    header { padding: 15px 20px; }
-    .pc-nav { display: none; }
-    .hamburger { display: block; }
+    header {
+        padding: 15px 20px;
+    }
 
-    section { padding: 80px 20px; }
+    .pc-nav {
+        display: none;
+    }
 
-    .about-grid { grid-template-columns: 1fr; gap: 40px; }
-    .about-img { height: 300px; }
+    .hamburger {
+        display: block;
+    }
 
-    .hero-title { font-size: 1.6rem; }
-    .hero-content { padding: 30px 15px; }
+    section {
+        padding: 80px 20px;
+    }
 
-    .service-list { flex-direction: column; }
+    .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+    }
+
+    .about-img {
+        height: 300px;
+    }
+
+    .hero-title {
+        font-size: 1.6rem;
+    }
+
+    .hero-content {
+        padding: 30px 15px;
+        animation: none;
+        /* スマホではふわふわ無効 */
+    }
+
+    .service-list {
+        flex-direction: column;
+    }
 
     /* スマホでは桜エフェクトを軽量化 */
     .sakura-petal {
@@ -805,4 +1085,334 @@ footer {
     .cursor-trail {
         display: none;
     }
+
+    /* スマホでは一部エフェクト無効化 */
+    .floating-heart,
+    .butterfly,
+    .magic-stardust {
+        display: none;
+    }
+}
+
+/* ===============================
+   💖 華やかなマイクロインタラクション
+   =============================== */
+
+/* 💓 ハートビートロゴ */
+@keyframes heartbeat {
+
+    0%,
+    100% {
+        transform: scale(1);
+    }
+
+    10% {
+        transform: scale(1.05);
+    }
+
+    20% {
+        transform: scale(1);
+    }
+
+    30% {
+        transform: scale(1.08);
+    }
+
+    40% {
+        transform: scale(1);
+    }
+}
+
+.logo a:hover {
+    animation: heartbeat 1.2s ease-in-out infinite;
+    transform: none;
+}
+
+/* 🌈 レインボーグロー */
+@keyframes rainbow-glow {
+    0% {
+        box-shadow: 0 0 20px var(--candy-pink), 0 0 40px rgba(255, 133, 162, 0.3);
+    }
+
+    25% {
+        box-shadow: 0 0 20px var(--soft-coral), 0 0 40px rgba(255, 182, 182, 0.3);
+    }
+
+    50% {
+        box-shadow: 0 0 20px var(--lavender-mist), 0 0 40px rgba(232, 212, 240, 0.3);
+    }
+
+    75% {
+        box-shadow: 0 0 20px var(--rose-gold), 0 0 40px rgba(245, 199, 199, 0.3);
+    }
+
+    100% {
+        box-shadow: 0 0 20px var(--candy-pink), 0 0 40px rgba(255, 133, 162, 0.3);
+    }
+}
+
+.contact-btn:hover {
+    animation: rainbow-glow 2s ease infinite;
+}
+
+/* 🦋 蝶々エフェクト */
+.butterfly {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9998;
+    opacity: 0;
+    filter: drop-shadow(0 2px 4px rgba(183, 141, 149, 0.3));
+}
+
+@keyframes butterfly-flutter {
+    0% {
+        transform: translateX(0) translateY(100vh) rotate(0deg) scaleX(1);
+        opacity: 0;
+    }
+
+    5% {
+        opacity: 0.8;
+    }
+
+    15% {
+        transform: translateX(30px) translateY(75vh) rotate(10deg) scaleX(-1);
+    }
+
+    30% {
+        transform: translateX(-20px) translateY(50vh) rotate(-10deg) scaleX(1);
+    }
+
+    45% {
+        transform: translateX(40px) translateY(35vh) rotate(15deg) scaleX(-1);
+    }
+
+    60% {
+        transform: translateX(-30px) translateY(20vh) rotate(-15deg) scaleX(1);
+    }
+
+    75% {
+        transform: translateX(25px) translateY(10vh) rotate(5deg) scaleX(-1);
+    }
+
+    90% {
+        opacity: 0.6;
+    }
+
+    100% {
+        transform: translateX(-10px) translateY(-50px) rotate(0deg) scaleX(1);
+        opacity: 0;
+    }
+}
+
+/* 💕 ハートバブル */
+.heart-bubble {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9997;
+    font-size: 1.5rem;
+    opacity: 0;
+    animation: bubble-rise 2s ease-out forwards;
+}
+
+@keyframes bubble-rise {
+    0% {
+        transform: translateY(0) scale(0.5);
+        opacity: 0;
+    }
+
+    20% {
+        opacity: 1;
+        transform: translateY(-20px) scale(1);
+    }
+
+    100% {
+        transform: translateY(-150px) scale(0.3) rotate(20deg);
+        opacity: 0;
+    }
+}
+
+/* ✨ マジックスターダスト */
+.magic-stardust {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9996;
+    width: 6px;
+    height: 6px;
+    background: radial-gradient(circle, var(--gold-shimmer) 0%, var(--rose-gold) 50%, transparent 70%);
+    border-radius: 50%;
+    animation: stardust-twinkle 1s ease-out forwards;
+}
+
+@keyframes stardust-twinkle {
+    0% {
+        transform: scale(0) rotate(0deg);
+        opacity: 0;
+    }
+
+    30% {
+        transform: scale(1.5) rotate(180deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: scale(0) rotate(360deg) translateY(-30px);
+        opacity: 0;
+    }
+}
+
+/* 🎊 コンフェッティ */
+.confetti {
+    position: fixed;
+    pointer-events: none;
+    z-index: 9999;
+    width: 10px;
+    height: 10px;
+    animation: confetti-fall 3s ease-out forwards;
+}
+
+@keyframes confetti-fall {
+    0% {
+        transform: translateY(0) rotate(0deg);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translateY(100vh) rotate(720deg);
+        opacity: 0;
+    }
+}
+
+/* 💫 シマーオーバーレイ（ローディング用） */
+.shimmer-overlay {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg,
+            transparent 0%,
+            rgba(255, 255, 255, 0.4) 50%,
+            transparent 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% {
+        left: -100%;
+    }
+
+    100% {
+        left: 100%;
+    }
+}
+
+/* 🎀 ローディングカーテン強化 */
+.loading-curtain {
+    background: linear-gradient(135deg, var(--pink-bg) 0%, var(--rose-gold) 50%, var(--pearl-white) 100%);
+}
+
+.loading-logo {
+    position: relative;
+    font-size: 2.5rem;
+    background: linear-gradient(90deg, var(--pink-accent), var(--candy-pink), var(--pink-accent));
+    background-size: 200% auto;
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    animation: gradient-text 3s ease infinite, simple-fade-in 1.5s ease forwards;
+}
+
+@keyframes gradient-text {
+    0% {
+        background-position: 0% center;
+    }
+
+    50% {
+        background-position: 100% center;
+    }
+
+    100% {
+        background-position: 0% center;
+    }
+}
+
+/* 💖 ローディング時のハート回転 */
+.loading-hearts {
+    position: absolute;
+    width: 120px;
+    height: 120px;
+    animation: rotate-hearts 4s linear infinite;
+}
+
+@keyframes rotate-hearts {
+    0% {
+        transform: rotate(0deg);
+    }
+
+    100% {
+        transform: rotate(360deg);
+    }
+}
+
+.loading-heart {
+    position: absolute;
+    font-size: 1rem;
+    color: var(--candy-pink);
+    animation: pulse-heart 1s ease-in-out infinite alternate;
+}
+
+.loading-heart:nth-child(1) {
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.loading-heart:nth-child(2) {
+    top: 50%;
+    right: 0;
+    transform: translateY(-50%);
+}
+
+.loading-heart:nth-child(3) {
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.loading-heart:nth-child(4) {
+    top: 50%;
+    left: 0;
+    transform: translateY(-50%);
+}
+
+@keyframes pulse-heart {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+
+    100% {
+        transform: scale(1.3);
+        opacity: 1;
+    }
+}
+
+/* 🌟 サービスカード グラスモーフィズム強化 */
+.service-item {
+    background: rgba(255, 255, 255, 0.8);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.5);
+    border-radius: 16px;
+}
+
+.service-item:hover {
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.9) 0%, rgba(253, 248, 248, 1) 100%);
+    border-color: var(--rose-gold);
+}
+
+/* ギャラリー 3Dチルト用 */
+.gallery-item {
+    transform-style: preserve-3d;
+    perspective: 1000px;
 }

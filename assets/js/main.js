@@ -40,6 +40,65 @@ document.querySelectorAll('.fade-in-up').forEach(el => {
 });
 
 // ===============================
+// 💖 タイピングアニメーション
+// ===============================
+const heroTitle = document.getElementById('hero-title');
+if (heroTitle) {
+    const text = 'ゆきの部屋';
+    let index = 0;
+
+    function typeWriter() {
+        if (index < text.length) {
+            heroTitle.textContent += text.charAt(index);
+            index++;
+            setTimeout(typeWriter, 200);
+        }
+    }
+
+    // ローディング後にタイピング開始
+    window.addEventListener('load', () => {
+        setTimeout(typeWriter, 2000);
+    });
+}
+
+// ===============================
+// 💫 フローティングハート
+// ===============================
+const heartsContainer = document.getElementById('floating-hearts-container');
+const heartSymbols = ['💖', '💕', '💗', '✨', '🌸'];
+
+function createFloatingHeart() {
+    if (!heartsContainer || window.innerWidth <= 768) return;
+
+    const heart = document.createElement('div');
+    heart.className = 'floating-heart';
+    heart.textContent = heartSymbols[Math.floor(Math.random() * heartSymbols.length)];
+
+    const startX = Math.random() * 100;
+    const size = Math.random() * 1.5 + 1;
+    const duration = Math.random() * 4 + 6;
+    const delay = Math.random() * 2;
+
+    heart.style.left = startX + '%';
+    heart.style.fontSize = size + 'rem';
+    heart.style.animationDuration = duration + 's';
+    heart.style.animationDelay = delay + 's';
+
+    heartsContainer.appendChild(heart);
+
+    setTimeout(() => heart.remove(), (duration + delay) * 1000);
+}
+
+// 定期的にハートを生成
+if (heartsContainer) {
+    setInterval(createFloatingHeart, 2000);
+    // 初期ハート
+    for (let i = 0; i < 5; i++) {
+        setTimeout(createFloatingHeart, i * 400);
+    }
+}
+
+// ===============================
 // 桜の花びらエフェクト（上品版）
 // ===============================
 function createSakuraPetal() {
@@ -85,6 +144,41 @@ function createSakuraPetal() {
     });
 }
 
+// ===============================
+// 🦋 蝶々エフェクト
+// ===============================
+function createButterfly() {
+    if (window.innerWidth <= 768) return;
+
+    const butterfly = document.createElement('div');
+    butterfly.className = 'butterfly';
+
+    const colors = ['#ff85a2', '#ffb6b6', '#e8d4f0', '#f5c7c7'];
+    const color = colors[Math.floor(Math.random() * colors.length)];
+
+    butterfly.innerHTML = `
+        <svg width="30" height="24" viewBox="0 0 30 24">
+            <g fill="${color}">
+                <ellipse cx="8" cy="8" rx="7" ry="6" opacity="0.8"/>
+                <ellipse cx="22" cy="8" rx="7" ry="6" opacity="0.8"/>
+                <ellipse cx="8" cy="16" rx="5" ry="5" opacity="0.6"/>
+                <ellipse cx="22" cy="16" rx="5" ry="5" opacity="0.6"/>
+                <rect x="14" y="4" width="2" height="16" rx="1" fill="#4a4a4a"/>
+            </g>
+        </svg>
+    `;
+
+    const startX = Math.random() * window.innerWidth;
+    const duration = Math.random() * 5 + 10;
+
+    butterfly.style.left = startX + 'px';
+    butterfly.style.animation = `butterfly-flutter ${duration}s ease-in-out forwards`;
+
+    document.body.appendChild(butterfly);
+
+    setTimeout(() => butterfly.remove(), duration * 1000);
+}
+
 // キラキラパーティクル生成
 function createSparkle() {
     const sparkle = document.createElement('div');
@@ -106,6 +200,84 @@ function createSparkle() {
     });
 }
 
+// ===============================
+// ✨ グリッターバースト（ページロード時）
+// ===============================
+function createGlitterBurst() {
+    const centerX = window.innerWidth / 2;
+    const centerY = window.innerHeight / 2;
+
+    for (let i = 0; i < 30; i++) {
+        setTimeout(() => {
+            const glitter = document.createElement('div');
+            glitter.className = 'glitter';
+
+            const angle = (Math.PI * 2 / 30) * i;
+            const distance = Math.random() * 200 + 100;
+            const x = centerX + Math.cos(angle) * distance;
+            const y = centerY + Math.sin(angle) * distance;
+
+            glitter.style.left = x + 'px';
+            glitter.style.top = y + 'px';
+
+            document.body.appendChild(glitter);
+
+            glitter.addEventListener('animationend', () => glitter.remove());
+        }, i * 30);
+    }
+}
+
+// ===============================
+// 💕 ハートバブル（クリック時）
+// ===============================
+function createHeartBubble(x, y) {
+    const hearts = ['💖', '💕', '💗', '💓', '💝'];
+
+    for (let i = 0; i < 3; i++) {
+        setTimeout(() => {
+            const bubble = document.createElement('div');
+            bubble.className = 'heart-bubble';
+            bubble.textContent = hearts[Math.floor(Math.random() * hearts.length)];
+
+            const offsetX = (Math.random() - 0.5) * 60;
+            bubble.style.left = (x + offsetX) + 'px';
+            bubble.style.top = y + 'px';
+            bubble.style.fontSize = (Math.random() * 0.8 + 1) + 'rem';
+
+            document.body.appendChild(bubble);
+
+            bubble.addEventListener('animationend', () => bubble.remove());
+        }, i * 100);
+    }
+}
+
+// ===============================
+// ✨ マジックスターダスト（カーソル追従強化）
+// ===============================
+let lastStardustTime = 0;
+const stardustThrottle = 80;
+
+function createMagicStardust(x, y) {
+    if (window.innerWidth <= 768) return;
+
+    const now = Date.now();
+    if (now - lastStardustTime < stardustThrottle) return;
+    lastStardustTime = now;
+
+    const stardust = document.createElement('div');
+    stardust.className = 'magic-stardust';
+
+    const offsetX = (Math.random() - 0.5) * 30;
+    const offsetY = (Math.random() - 0.5) * 30;
+
+    stardust.style.left = (x + offsetX) + 'px';
+    stardust.style.top = (y + offsetY) + 'px';
+
+    document.body.appendChild(stardust);
+
+    stardust.addEventListener('animationend', () => stardust.remove());
+}
+
 // 定期的に花びらを生成（PC: 1200ms、スマホ: 2000ms - より控えめに）
 const sakuraInterval = window.innerWidth > 768 ? 1200 : 2000;
 setInterval(createSakuraPetal, sakuraInterval);
@@ -113,6 +285,12 @@ setInterval(createSakuraPetal, sakuraInterval);
 // キラキラを時々生成（PC: 2000ms、スマホ: 3000ms）
 const sparkleInterval = window.innerWidth > 768 ? 2000 : 3000;
 setInterval(createSparkle, sparkleInterval);
+
+// 蝶々を時々生成（PC: 8000ms）
+if (window.innerWidth > 768) {
+    setInterval(createButterfly, 8000);
+    setTimeout(createButterfly, 3000);
+}
 
 // 初期花びらを数枚生成
 for (let i = 0; i < 3; i++) {
@@ -155,12 +333,18 @@ function createCursorTrail(x, y) {
 
 document.addEventListener('mousemove', (e) => {
     createCursorTrail(e.clientX, e.clientY);
+    createMagicStardust(e.clientX, e.clientY);
 
     // カーソルグローを追従
     if (cursorGlow) {
         cursorGlow.style.left = e.clientX + 'px';
         cursorGlow.style.top = e.clientY + 'px';
     }
+});
+
+// クリック時にハートバブル
+document.addEventListener('click', (e) => {
+    createHeartBubble(e.clientX, e.clientY);
 });
 
 // ===============================
@@ -212,6 +396,12 @@ requestAnimationFrame(raf);
 // ===============================
 window.addEventListener('load', () => {
     const curtain = document.getElementById('loading-curtain');
+
+    // グリッターバーストをローディング終了時に発動
+    setTimeout(() => {
+        createGlitterBurst();
+    }, 1400);
+
     // 少し待ってから幕を上げる（ロゴを見せる時間）
     setTimeout(() => {
         curtain.classList.add('loaded');
@@ -226,3 +416,4 @@ window.addEventListener('load', () => {
 // パララックスエフェクト (無効化)
 // ===============================
 // ヒーローコンテンツは固定表示（パララックスなし）
+
