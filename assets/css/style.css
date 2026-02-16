@@ -551,7 +551,57 @@ section {
     opacity: 1;
 }
 
+/* 2x2 ギャラリーグリッド */
+.gallery-2x2 {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    max-width: 800px;
+    margin: 0 auto;
+}
+
+.gallery-2x2 .gallery-item {
+    aspect-ratio: 1 / 1;
+}
+
+@media (max-width: 480px) {
+    .gallery-2x2 {
+        grid-template-columns: 1fr;
+    }
+}
+
 /* --- SERVICE --- */
+
+/* ジェンダーレス説明文 */
+.service-notice {
+    max-width: 800px;
+    margin: 0 auto 50px;
+    padding: 25px 30px;
+    background: linear-gradient(135deg, rgba(183, 141, 149, 0.08), rgba(183, 141, 149, 0.03));
+    border-left: 3px solid var(--pink-accent);
+    border-radius: 0 8px 8px 0;
+    text-align: center;
+}
+
+.service-notice p {
+    line-height: 2;
+    color: var(--text-main);
+    font-size: 0.95rem;
+}
+
+.service-notice strong {
+    color: var(--pink-accent);
+}
+
+/* サービス名の補足 */
+.service-note {
+    display: block;
+    font-size: 0.85rem;
+    font-weight: 400;
+    color: var(--text-light);
+    margin-top: 5px;
+}
+
 .service-list {
     display: flex;
     justify-content: space-between;
@@ -1210,8 +1260,17 @@ footer {
 .home-service-icon {
     width: 60px;
     height: 60px;
-    margin: 0 auto 20px;
+    margin: 0 auto 15px;
     object-fit: contain;
+}
+
+.home-service-num {
+    display: block;
+    font-family: var(--font-en);
+    color: var(--pink-accent);
+    font-size: 0.9rem;
+    margin-bottom: 10px;
+    letter-spacing: 0.1em;
 }
 
 .home-service-card h3 {
