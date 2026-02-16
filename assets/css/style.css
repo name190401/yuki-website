@@ -551,21 +551,59 @@ section {
     opacity: 1;
 }
 
-/* 2x2 ギャラリーグリッド */
-.gallery-2x2 {
+/* 新ギャラリー 4x3 Masonryグリッド */
+.gallery-new {
     display: grid;
-    grid-template-columns: repeat(2, 1fr);
-    gap: 20px;
-    max-width: 800px;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(4, 200px);
+    gap: 15px;
+    max-width: 1000px;
     margin: 0 auto;
 }
 
-.gallery-2x2 .gallery-item {
-    aspect-ratio: 1 / 1;
+.gallery-new .gallery-item {
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.gallery-new .gallery-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* 縦長アイテム（2行分） */
+.gallery-new .gallery-item-tall {
+    grid-row: span 2;
+}
+
+/* Yuki語スタイル（テキスト画像） */
+.gallery-new .gallery-item.yuki-quote {
+    background-color: #fafafa;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.gallery-new .gallery-item.yuki-quote img {
+    object-fit: contain;
+    padding: 10px;
+}
+
+/* レスポンシブ */
+@media (max-width: 768px) {
+    .gallery-new {
+        grid-template-columns: repeat(2, 1fr);
+        grid-template-rows: auto;
+    }
+
+    .gallery-new .gallery-item-tall {
+        grid-row: span 1;
+    }
 }
 
 @media (max-width: 480px) {
-    .gallery-2x2 {
+    .gallery-new {
         grid-template-columns: 1fr;
     }
 }
