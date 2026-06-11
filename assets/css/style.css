@@ -577,18 +577,46 @@ section {
     grid-row: span 2;
 }
 
-/* Yuki語スタイル（テキスト画像） */
+/* Yuki語スタイル（実テキスト・元画像の配色を忠実再現） */
 .gallery-new .gallery-item.yuki-quote {
-    background-color: #fafafa;
+    background: linear-gradient(160deg, #ffffff 0%, #fdf9f9 100%);
     display: flex;
     align-items: center;
     justify-content: center;
+    min-height: 150px;
+    padding: 16px;
 }
 
-.gallery-new .gallery-item.yuki-quote img {
-    object-fit: contain;
-    padding: 10px;
+.gallery-new .gallery-item.yuki-quote .quote-text {
+    margin: 0;
+    font-family: var(--font-jp);
+    color: #5c5c5c;
+    text-align: center;
+    line-height: 1.6;
+    letter-spacing: 0.22em;
+    /* 末尾の字間ぶんを相殺して光学的に中央へ */
+    text-indent: 0.22em;
+    font-size: clamp(0.95rem, 1.85vw, 1.2rem);
+    font-weight: 400;
 }
+
+.gallery-new .gallery-item.yuki-quote .quote-line {
+    display: block;
+}
+
+/* 2行の間に余白を取って読みやすく */
+.gallery-new .gallery-item.yuki-quote .quote-line + .quote-line {
+    margin-top: 0.85em;
+}
+
+/* キーワードは1文字ずつ元画像の色を再現（ピンク→ローズ→ピーチ→ゴールド） */
+.gallery-new .gallery-item.yuki-quote .quote-keyword span {
+    font-weight: 500;
+}
+.gallery-new .gallery-item.yuki-quote .quote-keyword span:nth-child(1) { color: #da94ba; }
+.gallery-new .gallery-item.yuki-quote .quote-keyword span:nth-child(2) { color: #df9fae; }
+.gallery-new .gallery-item.yuki-quote .quote-keyword span:nth-child(3) { color: #e8bda7; }
+.gallery-new .gallery-item.yuki-quote .quote-keyword span:nth-child(4) { color: #edd49f; }
 
 /* レスポンシブ */
 @media (max-width: 768px) {
